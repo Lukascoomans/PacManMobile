@@ -3,38 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/Background">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/PlayButton"
         android:layout_width="376dp"
         android:layout_height="281dp"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="16dp"
         android:scaleType="centerCrop"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/PlayButtonWithBorder" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/HighScoresButton"
         android:layout_width="148"
         android:layout_height="122"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         android:scaleType="centerCrop"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/HighscoresWithBorder" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/LeaderboardsButton"
         android:layout_width="148dp"
         android:layout_height="122dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="172dp"
+        android:background="@null"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/LeaderboardsWithBorder" />
 </android.support.constraint.ConstraintLayout>
