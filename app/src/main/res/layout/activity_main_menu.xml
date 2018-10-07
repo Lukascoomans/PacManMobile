@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/PlayButtonWithBorder" />
 
     <ImageButton
-        android:id="@+id/HighScoresButton"
+        android:id="@+id/highscoresButton"
         android:layout_width="166"
         android:layout_height="142"
         android:layout_marginStart="16dp"
@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/HighscoresWithBorder" />
 
     <ImageButton
-        android:id="@+id/LeaderboardsButton"
+        android:id="@+id/leaderboardsButton"
         android:layout_width="166"
         android:layout_height="142"
         android:layout_marginEnd="16dp"
