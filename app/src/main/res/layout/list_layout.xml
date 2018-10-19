@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>z
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/scoreRecyclerView"
+        android:id="@+id/rv_score"
         android:layout_width="314dp"
         android:layout_height="410dp"
         android:layout_marginStart="35dp"
