@@ -12,9 +12,6 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListViewHolder> 
     private Cursor cursor;
     private Context context;
 
-    private int position;
-    private int points;
-
     public ScoreListAdapter(Cursor cursor, Context context){
         this.cursor = cursor;
         this.context = context;
@@ -41,7 +38,9 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListViewHolder> 
         scorePoints = cursor.getColumnName(cursor.getColumnIndex("points"));
 
         viewHolder.positionTextView.setText(scorePosition);
+        viewHolder.positionTextView.setVisibility(View.VISIBLE);
         viewHolder.pointsTextView.setText(scorePoints);
+        viewHolder.pointsTextView.setVisibility(View.VISIBLE);
     }
 
     @Override
