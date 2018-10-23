@@ -3,13 +3,9 @@ package be.pxl.pacmanapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-<<<<<<< Updated upstream
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-=======
-import android.widget.TextView;
->>>>>>> Stashed changes
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,7 +21,6 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-<<<<<<< Updated upstream
         ImageButton leaderboardsButton = findViewById(R.id.leaderboards_button);
 
         leaderboardsButton.setOnClickListener(new View.OnClickListener() {
@@ -34,9 +29,5 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(new Intent(MainMenu.this, Leaderboards.class));
             }
         });
-=======
-
-
->>>>>>> Stashed changes
     }
 }
