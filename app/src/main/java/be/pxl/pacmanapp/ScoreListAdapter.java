@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,15 +34,13 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
         }
 
         String scorePosition = null;
-        scorePosition = cursor.getColumnName(cursor.getColumnIndex("position"));
+        scorePosition = String.valueOf(cursor.getInt(cursor.getColumnIndex("position")));
 
         String scorePoints = null;
-        scorePoints = cursor.getColumnName(cursor.getColumnIndex("points"));
+        scorePoints = String.valueOf(cursor.getInt(cursor.getColumnIndex("points")));
 
         viewHolder.positionTextView.setText(scorePosition);
-        viewHolder.positionTextView.setVisibility(View.VISIBLE);
         viewHolder.pointsTextView.setText(scorePoints);
-        viewHolder.pointsTextView.setVisibility(View.VISIBLE);
 
         }
 
