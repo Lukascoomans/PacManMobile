@@ -9,7 +9,7 @@ import android.database.AbstractCursor;
 import android.os.Bundle;
 
 public class JSONArrayCursor extends AbstractCursor {
-    public static final String DATA_KEY = "id";
+    public static final String DATA_KEY = "position";
     private JSONArray mJsonArray;
     private String[] mColumnNames;
     private JSONObject mJsonObject;

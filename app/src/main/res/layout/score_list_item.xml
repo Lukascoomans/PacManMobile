@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
-    <TextView
-        android:id="@+id/position"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        />
 
-    <TextView
-        android:id="@+id/points"
+    <LinearLayout
+        android:id="@+id/list_item_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="123dp" />
+
+        <TextView
+            android:id="@+id/points"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="125dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="123dp" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

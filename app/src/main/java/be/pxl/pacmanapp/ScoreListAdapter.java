@@ -7,8 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListViewHolder> {
+public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.ScoreListViewHolder> {
     private Cursor cursor;
     private Context context;
 
@@ -26,8 +27,8 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ScoreListViewHolder viewHolder, int pos) {
-        if(!cursor.moveToPosition(pos)){
+    public void onBindViewHolder(@NonNull ScoreListViewHolder viewHolder, int position) {
+        if(!cursor.moveToPosition(position)){
             return;
         }
 
@@ -41,7 +42,8 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListViewHolder> 
         viewHolder.positionTextView.setVisibility(View.VISIBLE);
         viewHolder.pointsTextView.setText(scorePoints);
         viewHolder.pointsTextView.setVisibility(View.VISIBLE);
-    }
+
+        }
 
     @Override
     public int getItemCount() {
@@ -61,6 +63,17 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListViewHolder> 
 
         if(newCursor != null){
             this.notifyDataSetChanged();
+        }
+    }
+
+    public class ScoreListViewHolder extends RecyclerView.ViewHolder{
+        public TextView positionTextView;
+        public TextView pointsTextView;
+
+        public ScoreListViewHolder(final View itemView) {
+            super(itemView);
+            positionTextView = itemView.findViewById(R.id.position);
+            pointsTextView = itemView.findViewById(R.id.points);
         }
     }
 }
