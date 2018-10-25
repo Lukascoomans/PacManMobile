@@ -12,7 +12,7 @@
         android:layout_gravity="center_vertical|end"
         android:fontFamily="@font/joystix"
         android:gravity="center"
-        android:text="POINTS"
+        android:text="Pos"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
 
@@ -24,7 +24,7 @@
         android:layout_gravity="center_vertical|end"
         android:fontFamily="@font/joystix"
         android:gravity="center"
-        android:text="POS"
+        android:text="POINTS"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
 

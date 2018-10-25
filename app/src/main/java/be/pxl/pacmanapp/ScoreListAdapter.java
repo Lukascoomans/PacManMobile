@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,7 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
     @Override
     public ScoreListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewtype) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.score_list_item, parent,false);
+        View view = inflater.inflate(R.layout.highscore_list_item, parent,false);
         return new ScoreListViewHolder(view);
     }
 
