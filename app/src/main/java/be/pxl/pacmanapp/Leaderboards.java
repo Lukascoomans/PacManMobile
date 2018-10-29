@@ -15,13 +15,15 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.IOError;
+
 public class Leaderboards extends AppCompatActivity {
     private static final String LIST_NAME = "Leaderboards";
     private ScoreListAdapter adapter;
     private RecyclerView scoreList;
     private Cursor cursor;
 
-    private String sample_response = "[{\"name\":Stefan Karl Stefanson,\"points\":12300,\"position\":1,\"country\":Belgium},{\"name\":David Attenborough,\"points\":6000,\"position\":2,\"country\":England},{\"name\":Steve from Accounting,\"points\":2400,\"position\":3,\"country\":America}]";
+    private String sample_response = "[{\"points\":300,\"position\":3},{\"points\":1000,\"position\":2},{\"points\":12300,\"position\":1}]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

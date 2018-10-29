@@ -22,19 +22,11 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         ImageButton leaderboardsButton = findViewById(R.id.leaderboards_button);
-        ImageButton highscoresButton = findViewById(R.id.highscores_button);
 
         leaderboardsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainMenu.this, Leaderboards.class));
-            }
-        });
-
-        highscoresButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainMenu.this, HighScores.class));
             }
         });
     }
