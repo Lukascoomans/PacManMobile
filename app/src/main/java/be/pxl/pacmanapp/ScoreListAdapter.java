@@ -14,10 +14,10 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
     private Context context;
     private boolean showCountry;
 
-    public ScoreListAdapter(Cursor cursor, Context context){
+    public ScoreListAdapter(Cursor cursor, Context context, boolean showCountry){
         this.cursor = cursor;
         this.context = context;
-        //this.showCountry = showCountry;
+        this.showCountry = showCountry;
     }
 
     @NonNull
@@ -41,15 +41,15 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
         scorePoints = String.valueOf(cursor.getInt(cursor.getColumnIndex("points")));
 
         String scoreName = null;
-        scorePosition = String.valueOf(cursor.getInt(cursor.getColumnIndex("name")));
+        scoreName = cursor.getString(cursor.getColumnIndex("name"));
 
         String scoreCountry = null;
-        scorePoints = String.valueOf(cursor.getInt(cursor.getColumnIndex("country")));
+        scoreCountry = cursor.getString(cursor.getColumnIndex("country"));
 
         viewHolder.positionTextView.setText(scorePosition);
         viewHolder.pointsTextView.setText(scorePoints);
-        viewHolder.nameTextView.setText(scorePosition);
-        viewHolder.countryTextView.setText(scorePoints);
+        viewHolder.nameTextView.setText(scoreName);
+        viewHolder.countryTextView.setText(scoreCountry);
 
         if(showCountry == false){
             viewHolder.HideCountryTextView();

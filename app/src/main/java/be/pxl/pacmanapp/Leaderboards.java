@@ -21,7 +21,7 @@ public class Leaderboards extends AppCompatActivity {
     private RecyclerView scoreList;
     private Cursor cursor;
 
-    private String sample_response = "[{\"name\":Stefan Karl Stefanson,\"points\":12300,\"position\":1,\"country\":Belgium},{\"name\":David Attenborough,\"points\":6000,\"position\":2,\"country\":England},{\"name\":Steve from Accounting,\"points\":2400,\"position\":3,\"country\":America}]";
+    private String sample_response = "[{\"name\":Stefan,\"points\":12300,\"position\":1,\"country\":Belgium},{\"name\":David,\"points\":6000,\"position\":2,\"country\":England},{\"name\":Steve,\"points\":2400,\"position\":3,\"country\":America}]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -35,7 +35,7 @@ public class Leaderboards extends AppCompatActivity {
 
         cursor = getJSONCursor(sample_response);
 
-        adapter = new ScoreListAdapter(cursor, this);
+        adapter = new ScoreListAdapter(cursor, this, true);
 
         scoreList.setLayoutManager(new LinearLayoutManager(this));
         scoreList.setAdapter(adapter);
