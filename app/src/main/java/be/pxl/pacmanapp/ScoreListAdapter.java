@@ -12,17 +12,19 @@ import android.widget.TextView;
 public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.ScoreListViewHolder> {
     private Cursor cursor;
     private Context context;
+    private boolean showCountry;
 
     public ScoreListAdapter(Cursor cursor, Context context){
         this.cursor = cursor;
         this.context = context;
+        //this.showCountry = showCountry;
     }
 
     @NonNull
     @Override
     public ScoreListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewtype) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.highscore_list_item, parent,false);
+        View view = inflater.inflate(R.layout.score_list_item, parent,false);
         return new ScoreListViewHolder(view);
     }
 
@@ -38,10 +40,21 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
         String scorePoints = null;
         scorePoints = String.valueOf(cursor.getInt(cursor.getColumnIndex("points")));
 
+        String scoreName = null;
+        scorePosition = String.valueOf(cursor.getInt(cursor.getColumnIndex("name")));
+
+        String scoreCountry = null;
+        scorePoints = String.valueOf(cursor.getInt(cursor.getColumnIndex("country")));
+
         viewHolder.positionTextView.setText(scorePosition);
         viewHolder.pointsTextView.setText(scorePoints);
+        viewHolder.nameTextView.setText(scorePosition);
+        viewHolder.countryTextView.setText(scorePoints);
 
+        if(showCountry == false){
+            viewHolder.HideCountryTextView();
         }
+    }
 
     @Override
     public int getItemCount() {
@@ -65,13 +78,21 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
     }
 
     public class ScoreListViewHolder extends RecyclerView.ViewHolder{
-        public TextView positionTextView;
-        public TextView pointsTextView;
+        public TextView positionTextView = null;
+        public TextView pointsTextView  = null;
+        public TextView nameTextView  = null;
+        public TextView countryTextView = null;
 
         public ScoreListViewHolder(final View itemView) {
             super(itemView);
             positionTextView = itemView.findViewById(R.id.position);
             pointsTextView = itemView.findViewById(R.id.points);
+            nameTextView = itemView.findViewById(R.id.name);
+            countryTextView = itemView.findViewById(R.id.country);
+        }
+
+        public void HideCountryTextView(){
+            countryTextView.setVisibility(View.GONE);
         }
     }
 }
