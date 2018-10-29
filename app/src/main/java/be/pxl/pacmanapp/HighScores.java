@@ -1,22 +1,17 @@
 package be.pxl.pacmanapp;
 
 import android.database.Cursor;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class Leaderboards extends AppCompatActivity {
-    private static final String LIST_NAME = "Leaderboards";
+public class HighScores extends AppCompatActivity {
+    private static final String LIST_NAME = "Highscores";
     private ScoreListAdapter adapter;
     private RecyclerView scoreList;
     private Cursor cursor;
@@ -39,6 +34,8 @@ public class Leaderboards extends AppCompatActivity {
 
         scoreList.setLayoutManager(new LinearLayoutManager(this));
         scoreList.setAdapter(adapter);
+
+
     }
 
     private Cursor getJSONCursor(String response){
@@ -53,5 +50,4 @@ public class Leaderboards extends AppCompatActivity {
         }
         return null;
     }
-
 }
