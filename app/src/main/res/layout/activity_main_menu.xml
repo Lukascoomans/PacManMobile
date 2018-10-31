@@ -2,43 +2,27 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <ImageButton
-        android:id="@+id/play_button"
-        android:layout_width="350dp"
-        android:layout_height="261dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:background="@null"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/play_buttonwithborder" />
+    <FrameLayout
+        android:id="@+id/playbutton_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
-    <ImageButton
-        android:id="@+id/highscores_button"
-        android:layout_width="166dp"
-        android:layout_height="142dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="52dp"
-        android:background="@null"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/highscores_with_border" />
+    <FrameLayout
+        android:id="@+id/highscoresbutton_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
-    <ImageButton
-        android:id="@+id/leaderboards_button"
-        android:layout_width="166dp"
-        android:layout_height="142dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="52dp"
-        android:background="@null"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/leaderboards_with_border" />
+    <FrameLayout
+        android:id="@+id/leaderboardsbutton_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
 </android.support.constraint.ConstraintLayout>
