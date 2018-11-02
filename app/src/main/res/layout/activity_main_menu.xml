@@ -9,20 +9,20 @@
 
     <FrameLayout
         android:id="@+id/playbutton_container"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         />
 
     <FrameLayout
         android:id="@+id/highscoresbutton_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         />
 
     <FrameLayout
         android:id="@+id/leaderboardsbutton_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         />
 
 </android.support.constraint.ConstraintLayout>

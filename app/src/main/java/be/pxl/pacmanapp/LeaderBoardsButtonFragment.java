@@ -1,5 +1,6 @@
 package be.pxl.pacmanapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.view.View.OnClickListener;
 
 public class LeaderBoardsButtonFragment extends Fragment {
 
@@ -23,6 +25,13 @@ public class LeaderBoardsButtonFragment extends Fragment {
         if (view != null){
             ImageButton imageButton = view.findViewById(R.id.leaderboards_button);
             imageButton.setImageResource(R.drawable.leaderboards_with_border);
+            imageButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent nextActivity = new Intent(getActivity(), Leaderboards.class);
+                    startActivity(nextActivity);
+                }
+            });
         }
     }
 }
