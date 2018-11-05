@@ -1,4 +1,6 @@
 /* Drew Schuster */
+package be.pxl.pacmangame;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
@@ -17,7 +19,7 @@ public class Pacman extends JApplet implements MouseListener, KeyListener
   long timer = -1;
 
   /* Create a new board */
-  Board b=new Board(); 
+  Board b=new Board();
 
   /* This timer is used to do request new frames be drawn*/
   javax.swing.Timer frameTimer;
@@ -69,14 +71,14 @@ public class Pacman extends JApplet implements MouseListener, KeyListener
   */
   public void repaint()
   {
-    if (b.player.teleport)
+    if (b.pacman.teleport)
     {
-      b.repaint(b.player.lastX-20,b.player.lastY-20,80,80);
-      b.player.teleport=false;
+      b.repaint(b.pacman.lastX-20,b.pacman.lastY-20,80,80);
+      b.pacman.teleport=false;
     }
     b.repaint(0,0,600,20);
     b.repaint(0,420,600,40);
-    b.repaint(b.player.x-20,b.player.y-20,80,80);
+    b.repaint(b.pacman.x-20,b.pacman.y-20,80,80);
     b.repaint(b.ghost1.x-20,b.ghost1.y-20,80,80);
     b.repaint(b.ghost2.x-20,b.ghost2.y-20,80,80);
     b.repaint(b.ghost3.x-20,b.ghost3.y-20,80,80);
@@ -153,11 +155,11 @@ public class Pacman extends JApplet implements MouseListener, KeyListener
          user playable mode.  Call the appropriate one here */
       if (b.demo)
       {
-        b.player.demoMove();
+        b.pacman.demoMove();
       }
       else
       {
-        b.player.move();
+        b.pacman.move();
       }
 
       /* Also move the ghosts, and update the pellet states */
@@ -165,7 +167,7 @@ public class Pacman extends JApplet implements MouseListener, KeyListener
       b.ghost2.move(); 
       b.ghost3.move(); 
       b.ghost4.move(); 
-      b.player.updatePellet();
+      b.pacman.updatePellet();
       b.ghost1.updatePellet();
       b.ghost2.updatePellet();
       b.ghost3.updatePellet();
@@ -186,11 +188,11 @@ public class Pacman extends JApplet implements MouseListener, KeyListener
       }
 
       /* Move all game elements back to starting positions and orientations */
-      b.player.currDirection='L';
-      b.player.direction='L';
-      b.player.desiredDirection='L';
-      b.player.x = 200;
-      b.player.y = 300;
+      b.pacman.currDirection='L';
+      b.pacman.direction='L';
+      b.pacman.desiredDirection='L';
+      b.pacman.x = 200;
+      b.pacman.y = 300;
       b.ghost1.x = 180;
       b.ghost1.y = 180;
       b.ghost2.x = 200;
@@ -245,16 +247,16 @@ public class Pacman extends JApplet implements MouseListener, KeyListener
     switch(e.getKeyCode())
     {
       case KeyEvent.VK_LEFT:
-       b.player.desiredDirection='L';
+       b.pacman.desiredDirection='L';
        break;     
       case KeyEvent.VK_RIGHT:
-       b.player.desiredDirection='R';
+       b.pacman.desiredDirection='R';
        break;     
       case KeyEvent.VK_UP:
-       b.player.desiredDirection='U';
+       b.pacman.desiredDirection='U';
        break;     
       case KeyEvent.VK_DOWN:
-       b.player.desiredDirection='D';
+       b.pacman.desiredDirection='D';
        break;     
     }
 
