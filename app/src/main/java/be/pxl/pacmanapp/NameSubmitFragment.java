@@ -1,10 +1,18 @@
 package be.pxl.pacmanapp;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +37,22 @@ public class NameSubmitFragment extends Fragment {
                 public void onClick(View v) {
                     String name = nameTextBox.getText().toString();
                     if (!name.isEmpty()){
-
+                        sendNotification();
                     }
                 }
             });
         }
+    }
+
+    private void sendNotification(){
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity(), "Default")
+                .setContentTitle("Thanks for playing!")
+                .setContentText("We hope to see you soon.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getActivity());
+
+// notificationId is a unique int for each notification that you must define
+        notificationManager.notify(1, mBuilder.build());
     }
 }
