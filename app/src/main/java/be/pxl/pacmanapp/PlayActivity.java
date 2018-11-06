@@ -1,8 +1,9 @@
 package be.pxl.pacmanapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,8 +21,6 @@ public class PlayActivity extends AppCompatActivity {
     private TextView timerTextView;
     private TextView countTextView;
     private View layoutView;
-    private EditText nameTextBox;
-    private Button nameSubmitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +39,11 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
 
-        nameTextBox = this.findViewById(R.id.name_textbox);
-        nameSubmitButton = this.findViewById(R.id.name_submit_button);
-        nameSubmitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = nameTextBox.getText().toString();
-                if (!name.isEmpty() && gameDone){
-
-                }
-            }
-        });
+        NameSubmitFragment nameSubmitFragment = new NameSubmitFragment();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.namesubmit_fragment_container, nameSubmitFragment);
+        transaction.commit();
 
         gameTimer = new CountDownTimer(30000, 1000) {
             @Override
