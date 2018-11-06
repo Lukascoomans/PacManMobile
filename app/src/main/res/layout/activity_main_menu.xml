@@ -9,35 +9,20 @@
 
     <FrameLayout
         android:id="@+id/playbutton_container"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
+        />
 
     <FrameLayout
         android:id="@+id/highscoresbutton_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playbutton_container">
-
-    </FrameLayout>
+        android:layout_height="fill_parent"
+        />
 
     <FrameLayout
         android:id="@+id/leaderboardsbutton_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playbutton_container">
-
-    </FrameLayout>
+        android:layout_height="fill_parent"
+        />
 
 </android.support.constraint.ConstraintLayout>
