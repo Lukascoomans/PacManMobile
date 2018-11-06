@@ -4,7 +4,6 @@ package be.pxl.pacmangame;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
@@ -13,13 +12,12 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.awt.*;
 import javax.imageio.*;
 import javax.swing.*;
 import java.lang.Math;
 import java.util.*;
 import java.io.*;
-
-import be.pxl.pacmanapp.R;
 
 
 /* Both Player and Ghost inherit Mover.  Has generic functions relevant to both*/
@@ -523,22 +521,29 @@ class Ghost extends Mover
 /*This board class contains the player, ghosts, pellets, and most of the game logic.*/
 public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callback
 {
-    //CODE FROM PACMAN ANDROID PROJECT
     private Thread thread;
     private SurfaceHolder holder;
     private boolean canDraw = true;
 
     private Paint paint;
     private Bitmap[] pacmanRight, pacmanDown, pacmanLeft, pacmanUp;
-    private Bitmap[] ghost1Bitmap, ghost2Bitmap, ghost3Bitmap, ghost4Bitmap;
-    private int totalFrame = 2;             // Total amount of frames fo each direction
+    private Bitmap ghost10, ghost11;
+    private Bitmap ghost20, ghost21;
+    private Bitmap ghost30, ghost31;
+    private Bitmap ghost40, ghost41;
+    private int totalFrame = 4;             // Total amount of frames fo each direction
     private int currentPacmanFrame = 0;     // Current Pacman frame to draw
     private long frameTicker;               // Current time since last frame has been drawn
-    private Player pacman;
-    private Ghost ghost1;
-    private Ghost ghost2;
-    private Ghost ghost3;
-    private Ghost ghost4;
+    private int xPosPacman;                 // x-axis position of pacman
+    private int yPosPacman;                 // y-axis position of pacman
+    private int xPosGhost1;                  // x-axis position of ghost
+    private int yPosGhost1;                  // y-axis position of ghost
+    private int xPosGhost2;                  // x-axis position of ghost
+    private int yPosGhost2;                  // y-axis position of ghost
+    private int xPosGhost3;                  // x-axis position of ghost
+    private int yPosGhost3;                  // y-axis position of ghost
+    private int xPosGhost4;                  // x-axis position of ghost
+    private int yPosGhost4;                  // y-axis position of ghost
     int xDistance;
     int yDistance;
     private float x1, x2, y1, y2;           // Initial/Final positions of swipe
@@ -552,57 +557,6 @@ public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callba
     private int currentScore = 0;           //Current game score
     final Handler handler = new Handler();
 
-    //CODE FROM PACMAN JAVA PROJECT
-    /* Initialize the player and ghosts */
-    Player pacman = new Player(200,300);
-    Ghost ghost1 = new Ghost(180,180);
-    Ghost ghost2 = new Ghost(200,180);
-    Ghost ghost3 = new Ghost(220,180);
-    Ghost ghost4 = new Ghost(220,180);
-
-    /* Timer is used for playing sound effects and animations */
-    long timer = System.currentTimeMillis();
-
-    /* Dying is used to count frames in the dying animation.  If it's non-zero,
-       pacman is in the process of dying */
-    int dying=0;
-
-    /* Score information */
-    int currScore;
-    int highScore;
-
-    /* if the high scores have been cleared, we have to update the top of the screen to reflect that */
-    boolean clearHighScores= false;
-
-    int numLives=2;
-
-    /*Contains the game map, passed to player and ghosts */
-    boolean[][] state;
-
-    /* Contains the state of all pellets*/
-    boolean[][] pellets;
-
-    /* Game dimensions */
-    int gridSize;
-    int max;
-
-    /* State flags*/
-    boolean stopped;
-    boolean titleScreen;
-    boolean winScreen = false;
-    boolean overScreen = false;
-    boolean demo = false;
-    int New;
-
-    /* Used to call sound effects */
-    GameSounds sounds;
-
-    int lastPelletEatenX = 0;
-    int lastPelletEatenY=0;
-
-    /* This is the font used for the menus */
-    Font font = new Font("Monospaced",Font.BOLD, 12);
-
     public Board(Context context) {
         super(context);
         holder = getHolder();
@@ -614,80 +568,115 @@ public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callba
         screenWidth = metrics.widthPixels;
         blockSize = screenWidth/17;
         blockSize = (blockSize / 5) * 5;
-        Player player = new Player(8 * blockSize,13 * blockSize);
-        Ghost ghost1 = new Ghost(8 * blockSize,4 * blockSize);
-        Ghost ghost2 = new Ghost(8 * blockSize,4 * blockSize);
-        Ghost ghost3 = new Ghost(8 * blockSize,4 * blockSize);
-        Ghost ghost4 = new Ghost(8 * blockSize,4 * blockSize);
+        xPosGhost = 8 * blockSize;
         ghostDirection = 4;
+        yPosGhost = 4 * blockSize;
+        xPosPacman = 8 * blockSize;
+        yPosPacman = 13 * blockSize;
 
         loadBitmapImages();
         Log.i("info", "Constructor");
-
-        initHighScores();
-        sounds = new GameSounds();
-        currScore=0;
-        stopped=false;
-        max=400;
-        gridSize=20;
-        New=0;
-        titleScreen = true;
         }
+  /* Initialize the images*/
+  /* For JAR File*/
+  /*
+  Image pacmanImage = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/pacman.jpg"));
+  Image pacmanUpImage = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/pacmanup.jpg")); 
+  Image pacmanDownImage = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/pacmandown.jpg")); 
+  Image pacmanLeftImage = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/pacmanleft.jpg")); 
+  Image pacmanRightImage = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/pacmanright.jpg")); 
+  Image ghost10 = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/ghost10.jpg")); 
+  Image ghost20 = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/ghost20.jpg")); 
+  Image ghost30 = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/ghost30.jpg")); 
+  Image ghost40 = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/ghost40.jpg")); 
+  Image ghost11 = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/ghost11.jpg")); 
+  Image ghost21 = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/ghost21.jpg")); 
+  Image ghost31 = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/ghost31.jpg")); 
+  Image ghost41 = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/ghost41.jpg")); 
+  Image titleScreenImage = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/titleScreen.jpg")); 
+  Image gameOverImage = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/gameOver.jpg")); 
+  Image winScreenImage = Toolkit.getDefaultToolkit().getImage(Pacman.class.getResource("img/winScreen.jpg"));
+  */
+  /* For NOT JAR file*/
+  Image pacmanImage = new ImageIcon(this.getClass().getResource("img/pacman.jpg")).getImage();
+  Image pacmanUpImage = new ImageIcon(this.getClass().getResource("img/pacmanup.jpg")).getImage();
+  Image pacmanDownImage = new ImageIcon(this.getClass().getResource("img/pacmandown.jpg")).getImage();
+  Image pacmanLeftImage = new ImageIcon(this.getClass().getResource("img/pacmanleft.jpg")).getImage();
+  Image pacmanRightImage = new ImageIcon(this.getClass().getResource("img/pacmanright.jpg")).getImage();
+  Image ghost10 = new ImageIcon(this.getClass().getResource("img/ghost10.jpg")).getImage();
+  Image ghost20 = new ImageIcon(this.getClass().getResource("img/ghost20.jpg")).getImage();
+  Image ghost30 = new ImageIcon(this.getClass().getResource("img/ghost30.jpg")).getImage();
+  Image ghost40 = new ImageIcon(this.getClass().getResource("img/ghost40.jpg")).getImage();
+  Image ghost11 = new ImageIcon(this.getClass().getResource("img/ghost11.jpg")).getImage();
+  Image ghost21 = new ImageIcon(this.getClass().getResource("img/ghost21.jpg")).getImage();
+  Image ghost31 = new ImageIcon(this.getClass().getResource("img/ghost31.jpg")).getImage();
+  Image ghost41 =  new ImageIcon(this.getClass().getResource("img/ghost41.jpg")).getImage();
+  Image titleScreenImage = new ImageIcon(this.getClass().getResource("img/titleScreen.jpg")).getImage();
+  Image gameOverImage = new ImageIcon(this.getClass().getResource("img/gameOver.jpg")).getImage();
+  Image winScreenImage = new ImageIcon(this.getClass().getResource("img/winScreen.jpg")).getImage();
 
-    private void loadBitmapImages() {
-        // Scales the sprites based on screen
-        int spriteSize = screenWidth/17;        // Size of Pacman & Ghost
-        spriteSize = (spriteSize / 5) * 5;      // Keep it a multiple of 5
+  /* Initialize the player and ghosts */
+  Player player = new Player(200,300);
+  Ghost ghost1 = new Ghost(180,180);
+  Ghost ghost2 = new Ghost(200,180);
+  Ghost ghost3 = new Ghost(220,180);
+  Ghost ghost4 = new Ghost(220,180);
 
-        // Add bitmap images of pacman facing right
-        pacmanRight = new Bitmap[totalFrame];
-        pacmanRight[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(),R.drawable.pacman), spriteSize, spriteSize, false);
-        pacmanRight[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.pacmanright), spriteSize, spriteSize, false);
-        // Add bitmap images of pacman facing down
-        pacmanDown = new Bitmap[totalFrame];
-        pacmanDown[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.pacman), spriteSize, spriteSize, false);
-        pacmanDown[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.pacmandown), spriteSize, spriteSize, false);
-        // Add bitmap images of pacman facing left
-        pacmanLeft = new Bitmap[totalFrame];
-        pacmanLeft[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.pacman), spriteSize, spriteSize, false);
-        pacmanLeft[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.pacmanleft), spriteSize, spriteSize, false);
-        // Add bitmap images of pacman facing up
-        pacmanUp = new Bitmap[totalFrame];
-        pacmanUp[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.pacman), spriteSize, spriteSize, false);
-        pacmanUp[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.pacmanup), spriteSize, spriteSize, false);
+  /* Timer is used for playing sound effects and animations */
+  long timer = System.currentTimeMillis();
 
-        ghost1Bitmap = new Bitmap[totalFrame];
-        ghost1Bitmap[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(),R.drawable.ghost10), spriteSize, spriteSize, false);
-        ghost1Bitmap[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.ghost11), spriteSize, spriteSize, false);
+  /* Dying is used to count frames in the dying animation.  If it's non-zero,
+     pacman is in the process of dying */
+  int dying=0;
+ 
+  /* Score information */
+  int currScore;
+  int highScore;
 
-        ghost2Bitmap = new Bitmap[totalFrame];
-        ghost2Bitmap[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(),R.drawable.ghost20), spriteSize, spriteSize, false);
-        ghost2Bitmap[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.ghost21), spriteSize, spriteSize, false);
+  /* if the high scores have been cleared, we have to update the top of the screen to reflect that */
+  boolean clearHighScores= false;
 
-        ghost3Bitmap = new Bitmap[totalFrame];
-        ghost3Bitmap[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(),R.drawable.ghost30), spriteSize, spriteSize, false);
-        ghost3Bitmap[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.ghost31), spriteSize, spriteSize, false);
+  int numLives=2;
 
-        ghost4Bitmap = new Bitmap[totalFrame];
-        ghost4Bitmap[0] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(),R.drawable.ghost40), spriteSize, spriteSize, false);
-        ghost4Bitmap[1] = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                getResources(), R.drawable.ghost41), spriteSize, spriteSize, false);
-    }
+  /*Contains the game map, passed to player and ghosts */
+  boolean[][] state;
+
+  /* Contains the state of all pellets*/
+  boolean[][] pellets;
+
+  /* Game dimensions */
+  int gridSize;
+  int max;
+
+  /* State flags*/
+  boolean stopped;
+  boolean titleScreen;
+  boolean winScreen = false;
+  boolean overScreen = false;
+  boolean demo = false;
+  int New;
+
+  /* Used to call sound effects */
+  GameSounds sounds;
+
+  int lastPelletEatenX = 0;
+  int lastPelletEatenY=0;
+
+  /* This is the font used for the menus */
+  Font font = new Font("Monospaced",Font.BOLD, 12);
+
+  /* Constructor initializes state flags etc.*/
+  public Board() 
+  {
+    initHighScores();
+    sounds = new GameSounds();
+    currScore=0;
+    stopped=false;
+    max=400;
+    gridSize=20;
+    New=0;
+    titleScreen = true;
+  }
 
   /* Reads the high scores file and saves it */
   public void initHighScores()
@@ -956,19 +945,19 @@ public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callba
       sounds.nomNomStop();
 
       /* Draw the pacman */
-      g.drawImage(pacmanImage,pacman.x,pacman.y,Color.BLACK,null);
+      g.drawImage(pacmanImage,player.x,player.y,Color.BLACK,null);
       g.setColor(Color.BLACK);
       
       /* Kill the pacman */
       if (dying == 4)
-        g.fillRect(pacman.x,pacman.y,20,7);
+        g.fillRect(player.x,player.y,20,7);
       else if ( dying == 3)
-        g.fillRect(pacman.x,pacman.y,20,14);
+        g.fillRect(player.x,player.y,20,14);
       else if ( dying == 2)
-        g.fillRect(pacman.x,pacman.y,20,20);
+        g.fillRect(player.x,player.y,20,20); 
       else if ( dying == 1)
       {
-        g.fillRect(pacman.x,pacman.y,20,20);
+        g.fillRect(player.x,player.y,20,20); 
       }
      
       /* Take .1 seconds on each frame of death, and then take 2 seconds
@@ -1065,23 +1054,23 @@ public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callba
     if (New==1)
     {
       reset();
-      pacman = new Player(200,300);
-      ghost1Bitmap = new Ghost(180,180);
-      ghost2Bitmap = new Ghost(200,180);
-      ghost3Bitmap = new Ghost(220,180);
-      ghost4Bitmap = new Ghost(220,180);
+      player = new Player(200,300);
+      ghost1 = new Ghost(180,180);
+      ghost2 = new Ghost(200,180);
+      ghost3 = new Ghost(220,180);
+      ghost4 = new Ghost(220,180);
       currScore = 0;
       drawBoard(g);
       drawPellets(g);
       drawLives(g);
       /* Send the game map to player and all ghosts */
-      pacman.updateState(state);
+      player.updateState(state);
       /* Don't let the player go in the ghost box*/
-      pacman.state[9][7]=false;
-      ghost1Bitmap.updateState(state);
-      ghost2Bitmap.updateState(state);
-      ghost3Bitmap.updateState(state);
-      ghost4Bitmap.updateState(state);
+      player.state[9][7]=false; 
+      ghost1.updateState(state);
+      ghost2.updateState(state);
+      ghost3.updateState(state);
+      ghost4.updateState(state);
    
       /* Draw the top menu bar*/
       g.setColor(Color.YELLOW);
@@ -1120,30 +1109,30 @@ public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callba
     }
     
     /* Drawing optimization */
-    g.copyArea(pacman.x-20,pacman.y-20,80,80,0,0);
-    g.copyArea(ghost1Bitmap.x-20, ghost1Bitmap.y-20,80,80,0,0);
-    g.copyArea(ghost2Bitmap.x-20, ghost2Bitmap.y-20,80,80,0,0);
-    g.copyArea(ghost3Bitmap.x-20, ghost3Bitmap.y-20,80,80,0,0);
-    g.copyArea(ghost4Bitmap.x-20, ghost4Bitmap.y-20,80,80,0,0);
+    g.copyArea(player.x-20,player.y-20,80,80,0,0);
+    g.copyArea(ghost1.x-20,ghost1.y-20,80,80,0,0);
+    g.copyArea(ghost2.x-20,ghost2.y-20,80,80,0,0);
+    g.copyArea(ghost3.x-20,ghost3.y-20,80,80,0,0);
+    g.copyArea(ghost4.x-20,ghost4.y-20,80,80,0,0);
     
 
 
     /* Detect collisions */
-    if (pacman.x == ghost1Bitmap.x && Math.abs(pacman.y- ghost1Bitmap.y) < 10)
+    if (player.x == ghost1.x && Math.abs(player.y-ghost1.y) < 10)
       oops=true;
-    else if (pacman.x == ghost2Bitmap.x && Math.abs(pacman.y- ghost2Bitmap.y) < 10)
+    else if (player.x == ghost2.x && Math.abs(player.y-ghost2.y) < 10)
       oops=true;
-    else if (pacman.x == ghost3Bitmap.x && Math.abs(pacman.y- ghost3Bitmap.y) < 10)
+    else if (player.x == ghost3.x && Math.abs(player.y-ghost3.y) < 10)
       oops=true;
-    else if (pacman.x == ghost4Bitmap.x && Math.abs(pacman.y- ghost4Bitmap.y) < 10)
+    else if (player.x == ghost4.x && Math.abs(player.y-ghost4.y) < 10)
       oops=true;
-    else if (pacman.y == ghost1Bitmap.y && Math.abs(pacman.x- ghost1Bitmap.x) < 10)
+    else if (player.y == ghost1.y && Math.abs(player.x-ghost1.x) < 10)
       oops=true;
-    else if (pacman.y == ghost2Bitmap.y && Math.abs(pacman.x- ghost2Bitmap.x) < 10)
+    else if (player.y == ghost2.y && Math.abs(player.x-ghost2.x) < 10)
       oops=true;
-    else if (pacman.y == ghost3Bitmap.y && Math.abs(pacman.x- ghost3Bitmap.x) < 10)
+    else if (player.y == ghost3.y && Math.abs(player.x-ghost3.x) < 10)
       oops=true;
-    else if (pacman.y == ghost4Bitmap.y && Math.abs(pacman.x- ghost4Bitmap.x) < 10)
+    else if (player.y == ghost4.y && Math.abs(player.x-ghost4.x) < 10)
       oops=true;
 
     /* Kill the pacman */
@@ -1166,26 +1155,26 @@ public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callba
 
     /* Delete the players and ghosts */
     g.setColor(Color.BLACK);
-    g.fillRect(pacman.lastX,pacman.lastY,20,20);
-    g.fillRect(ghost1Bitmap.lastX, ghost1Bitmap.lastY,20,20);
-    g.fillRect(ghost2Bitmap.lastX, ghost2Bitmap.lastY,20,20);
-    g.fillRect(ghost3Bitmap.lastX, ghost3Bitmap.lastY,20,20);
-    g.fillRect(ghost4Bitmap.lastX, ghost4Bitmap.lastY,20,20);
+    g.fillRect(player.lastX,player.lastY,20,20);
+    g.fillRect(ghost1.lastX,ghost1.lastY,20,20);
+    g.fillRect(ghost2.lastX,ghost2.lastY,20,20);
+    g.fillRect(ghost3.lastX,ghost3.lastY,20,20);
+    g.fillRect(ghost4.lastX,ghost4.lastY,20,20);
 
     /* Eat pellets */
-    if ( pellets[pacman.pelletX][pacman.pelletY] && New!=2 && New !=3)
+    if ( pellets[player.pelletX][player.pelletY] && New!=2 && New !=3)
     {
-      lastPelletEatenX = pacman.pelletX;
-      lastPelletEatenY = pacman.pelletY;
+      lastPelletEatenX = player.pelletX;
+      lastPelletEatenY = player.pelletY;
 
       /* Play eating sound */
       sounds.nomNom();
       
       /* Increment pellets eaten value to track for end game */
-      pacman.pelletsEaten++;
+      player.pelletsEaten++;
 
       /* Delete the pellet*/
-      pellets[pacman.pelletX][pacman.pelletY]=false;
+      pellets[player.pelletX][player.pelletY]=false;
 
       /* Increment the score */
       currScore += 50;
@@ -1201,7 +1190,7 @@ public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callba
         g.drawString("Score: "+(currScore)+"\t High Score: "+highScore,20,10);
 
       /* If this was the last pellet */
-      if (pacman.pelletsEaten == 173)
+      if (player.pelletsEaten == 173)
       {
         /*Demo mode can't get a high score */
         if (!demo)
@@ -1221,7 +1210,7 @@ public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callba
     }
 
     /* If we moved to a location without pellets, stop the sounds */
-    else if ( (pacman.pelletX != lastPelletEatenX || pacman.pelletY != lastPelletEatenY ) || pacman.stopped)
+    else if ( (player.pelletX != lastPelletEatenX || player.pelletY != lastPelletEatenY ) || player.stopped)
     {
       /* Stop any pacman eating sounds */
       sounds.nomNomStop();
@@ -1229,64 +1218,64 @@ public class Board extends SurfaceView implements Runnable, SurfaceHolder.Callba
 
 
     /* Replace pellets that have been run over by ghosts */
-    if ( pellets[ghost1Bitmap.lastPelletX][ghost1Bitmap.lastPelletY])
-      fillPellet(ghost1Bitmap.lastPelletX, ghost1Bitmap.lastPelletY,g);
-    if ( pellets[ghost2Bitmap.lastPelletX][ghost2Bitmap.lastPelletY])
-      fillPellet(ghost2Bitmap.lastPelletX, ghost2Bitmap.lastPelletY,g);
-    if ( pellets[ghost3Bitmap.lastPelletX][ghost3Bitmap.lastPelletY])
-      fillPellet(ghost3Bitmap.lastPelletX, ghost3Bitmap.lastPelletY,g);
-    if ( pellets[ghost4Bitmap.lastPelletX][ghost4Bitmap.lastPelletY])
-      fillPellet(ghost4Bitmap.lastPelletX, ghost4Bitmap.lastPelletY,g);
+    if ( pellets[ghost1.lastPelletX][ghost1.lastPelletY])
+      fillPellet(ghost1.lastPelletX,ghost1.lastPelletY,g);
+    if ( pellets[ghost2.lastPelletX][ghost2.lastPelletY])
+      fillPellet(ghost2.lastPelletX,ghost2.lastPelletY,g);
+    if ( pellets[ghost3.lastPelletX][ghost3.lastPelletY])
+      fillPellet(ghost3.lastPelletX,ghost3.lastPelletY,g);
+    if ( pellets[ghost4.lastPelletX][ghost4.lastPelletY])
+      fillPellet(ghost4.lastPelletX,ghost4.lastPelletY,g);
 
 
     /*Draw the ghosts */
-    if (ghost1Bitmap.frameCount < 5)
+    if (ghost1.frameCount < 5)
     {
       /* Draw first frame of ghosts */
-      g.drawImage(ghost10, ghost1Bitmap.x, ghost1Bitmap.y,Color.BLACK,null);
-      g.drawImage(ghost20, ghost2Bitmap.x, ghost2Bitmap.y,Color.BLACK,null);
-      g.drawImage(ghost30, ghost3Bitmap.x, ghost3Bitmap.y,Color.BLACK,null);
-      g.drawImage(ghost40, ghost4Bitmap.x, ghost4Bitmap.y,Color.BLACK,null);
-      ghost1Bitmap.frameCount++;
+      g.drawImage(ghost10,ghost1.x,ghost1.y,Color.BLACK,null);
+      g.drawImage(ghost20,ghost2.x,ghost2.y,Color.BLACK,null);
+      g.drawImage(ghost30,ghost3.x,ghost3.y,Color.BLACK,null);
+      g.drawImage(ghost40,ghost4.x,ghost4.y,Color.BLACK,null);
+      ghost1.frameCount++;
     }
     else
     {
       /* Draw second frame of ghosts */
-      g.drawImage(ghost11, ghost1Bitmap.x, ghost1Bitmap.y,Color.BLACK,null);
-      g.drawImage(ghost21, ghost2Bitmap.x, ghost2Bitmap.y,Color.BLACK,null);
-      g.drawImage(ghost31, ghost3Bitmap.x, ghost3Bitmap.y,Color.BLACK,null);
-      g.drawImage(ghost41, ghost4Bitmap.x, ghost4Bitmap.y,Color.BLACK,null);
-      if (ghost1Bitmap.frameCount >=10)
-        ghost1Bitmap.frameCount=0;
+      g.drawImage(ghost11,ghost1.x,ghost1.y,Color.BLACK,null);
+      g.drawImage(ghost21,ghost2.x,ghost2.y,Color.BLACK,null);
+      g.drawImage(ghost31,ghost3.x,ghost3.y,Color.BLACK,null);
+      g.drawImage(ghost41,ghost4.x,ghost4.y,Color.BLACK,null);
+      if (ghost1.frameCount >=10)
+        ghost1.frameCount=0;
       else
-        ghost1Bitmap.frameCount++;
+        ghost1.frameCount++;
     }
 
     /* Draw the pacman */
-    if (pacman.frameCount < 5)
+    if (player.frameCount < 5)
     {
       /* Draw mouth closed */
-      g.drawImage(pacmanImage,pacman.x,pacman.y,Color.BLACK,null);
+      g.drawImage(pacmanImage,player.x,player.y,Color.BLACK,null);
     }
     else
     {
       /* Draw mouth open in appropriate direction */
-      if (pacman.frameCount >=10)
-        pacman.frameCount=0;
+      if (player.frameCount >=10)
+        player.frameCount=0;
 
-      switch(pacman.currDirection)
+      switch(player.currDirection)
       {
         case 'L':
-           g.drawImage(pacmanLeftImage,pacman.x,pacman.y,Color.BLACK,null);
+           g.drawImage(pacmanLeftImage,player.x,player.y,Color.BLACK,null);
            break;     
         case 'R':
-           g.drawImage(pacmanRightImage,pacman.x,pacman.y,Color.BLACK,null);
+           g.drawImage(pacmanRightImage,player.x,player.y,Color.BLACK,null);
            break;     
         case 'U':
-           g.drawImage(pacmanUpImage,pacman.x,pacman.y,Color.BLACK,null);
+           g.drawImage(pacmanUpImage,player.x,player.y,Color.BLACK,null);
            break;     
         case 'D':
-           g.drawImage(pacmanDownImage,pacman.x,pacman.y,Color.BLACK,null);
+           g.drawImage(pacmanDownImage,player.x,player.y,Color.BLACK,null);
            break;     
       }
     }

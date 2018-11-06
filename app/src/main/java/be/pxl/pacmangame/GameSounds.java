@@ -1,6 +1,4 @@
 /* Drew Schuster */
-package be.pxl.pacmangame;
-
 import java.io.*;
 import java.net.URL;
 import javax.sound.sampled.*;
