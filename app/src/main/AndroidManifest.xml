@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PlayActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Leaderboards" >
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
