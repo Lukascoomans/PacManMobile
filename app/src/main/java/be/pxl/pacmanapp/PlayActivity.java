@@ -6,17 +6,22 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class PlayActivity extends AppCompatActivity {
     private int count = 0;
     private boolean gameBusy = false;
+    private boolean gameDone = false;
     private CountDownTimer prepareTimer;
     private CountDownTimer gameTimer;
 
     private TextView timerTextView;
     private TextView countTextView;
     private View layoutView;
+    private EditText nameTextBox;
+    private Button nameSubmitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,18 @@ public class PlayActivity extends AppCompatActivity {
                 if (gameBusy){
                     count++;
                     countTextView.setText(String.valueOf(count));
+                }
+            }
+        });
+
+        nameTextBox = this.findViewById(R.id.name_textbox);
+        nameSubmitButton = this.findViewById(R.id.name_submit_button);
+        nameSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameTextBox.getText().toString();
+                if (!name.isEmpty() && gameDone){
+
                 }
             }
         });
@@ -52,6 +69,7 @@ public class PlayActivity extends AppCompatActivity {
 
             public void onFinish() {
                 gameBusy = false;
+                gameDone = true;
             }
         };
 
