@@ -28,6 +28,9 @@ public class HighScores extends AppCompatActivity {
 
         scoreList = this.findViewById(R.id.rv_score);
 
+        ScoreBoardCaller caller = new ScoreBoardCaller(this);
+        String json = (String)caller.callDatabase();
+
         cursor = getJSONCursor(sample_response);
 
         adapter = new ScoreListAdapter(cursor, this, false);

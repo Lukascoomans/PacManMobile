@@ -35,10 +35,10 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
         }
 
         String scorePosition = null;
-        scorePosition = String.valueOf(cursor.getInt(cursor.getColumnIndex("position")));
+        scorePosition = cursor.getString(cursor.getColumnIndex("position"));
 
         String scorePoints = null;
-        scorePoints = String.valueOf(cursor.getInt(cursor.getColumnIndex("points")));
+        scorePoints = cursor.getString(cursor.getColumnIndex("points"));
 
         String scoreName = null;
         scoreName = cursor.getString(cursor.getColumnIndex("name"));

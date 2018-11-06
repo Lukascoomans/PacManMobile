@@ -14,41 +14,34 @@ import com.android.volley.toolbox.Volley;
 
 public class ScoreBoardCaller {
 
-    private TextView mTextView;
-
     RequestQueue requestQueue ;
 
-    public ScoreBoardCaller(Context context,View view) {
-        this.mTextView = (TextView) view;
+    String jsonResponse= "";
+
+    public ScoreBoardCaller(Context context) {
         requestQueue= Volley.newRequestQueue(context);;
     }
 
 
     public Object callDatabase() {
+        String url ="http://web.stanford.edu/class/cs221/leaderboardData.js";
 
-
-
-        String url ="https://swapi.co/api/films/2/";
-
-
-// Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                        mTextView.setText("Response is: "+ response.substring(0,500));
+                        jsonResponse=response;
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                mTextView.setText("That didn't work!"+error.toString());
             }
         });
 
 // Add the request to the RequestQueue.
         requestQueue.add(stringRequest);
-        return null;
+        return jsonResponse;
     }
 }

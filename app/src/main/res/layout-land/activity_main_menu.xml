@@ -6,39 +6,37 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <ImageButton
-        android:id="@+id/PlayButton"
-        android:layout_width="376dp"
-        android:layout_height="281dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
-        android:scaleType="centerCrop"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/play_buttonwithborder" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/HighScoresButton"
-        android:layout_width="148dp"
-        android:layout_height="122dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:scaleType="centerCrop"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/highscores_with_border" />
+        <FrameLayout
+            android:id="@+id/playbutton_container"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    <ImageButton
-        android:id="@+id/LeaderboardsButton"
-        android:layout_width="148dp"
-        android:layout_height="122dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:background="@null"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/leaderboards_with_border" />
+        <FrameLayout
+            android:id="@+id/highscoresbutton_container"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="10dp" />
+
+        <FrameLayout
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/leaderboardsbutton_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="50dp"
+            />
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
