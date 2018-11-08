@@ -22,6 +22,9 @@ public class PlayActivity extends AppCompatActivity {
     private TextView countTextView;
     private View layoutView;
 
+    StartButtonFragment startButtonFragment;
+    NameSubmitFragment nameSubmitFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +42,10 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
 
-        NameSubmitFragment nameSubmitFragment = new NameSubmitFragment();
+        startButtonFragment = new StartButtonFragment();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.namesubmit_fragment_container, nameSubmitFragment);
+        transaction.add(R.id.startbutton_fragment_container, startButtonFragment);
         transaction.commit();
 
         gameTimer = new CountDownTimer(30000, 1000) {
@@ -63,10 +66,15 @@ public class PlayActivity extends AppCompatActivity {
             public void onFinish() {
                 gameBusy = false;
                 gameDone = true;
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                nameSubmitFragment = new NameSubmitFragment();
+                transaction.add(R.id.namesubmit_fragment_container, nameSubmitFragment);
+                transaction.commit();
             }
         };
 
-        prepareTimer = new CountDownTimer(4000, 1000) {
+        prepareTimer = new CountDownTimer(5000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int currSecond = (int) millisUntilFinished / 1000;
@@ -90,8 +98,14 @@ public class PlayActivity extends AppCompatActivity {
                 countTextView.setText(String.valueOf(count));
             }
         };
+    }
 
-        Log.i("PrepareTimerStart", "Starting the prepareTimer.");
+    public void startGame(){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.remove(startButtonFragment);
+        transaction.commit();
+
         prepareTimer.start();
     }
 }
