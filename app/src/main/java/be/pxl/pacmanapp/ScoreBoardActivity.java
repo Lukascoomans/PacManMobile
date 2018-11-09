@@ -14,9 +14,9 @@ public class ScoreBoardActivity extends AppCompatActivity {
         String country = (String)getIntent().getExtras().get("country");
         String points = (String)getIntent().getExtras().get("points");
 
-        TextView nameView = (TextView)findViewById(R.id.name);
-        TextView countryView = (TextView)findViewById(R.id.country);
-        TextView pointsView = (TextView)findViewById(R.id.points);
+        TextView nameView = (TextView)findViewById(R.id.article_fragment).findViewById(R.id.name);
+        TextView countryView = (TextView)findViewById(R.id.article_fragment).findViewById(R.id.country);
+        TextView pointsView = (TextView)findViewById(R.id.article_fragment).findViewById(R.id.points);
         nameView.setText(name);
         countryView.setText(country);
         pointsView.setText(points);

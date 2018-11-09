@@ -10,40 +10,11 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/joystix"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="NAME"
-            android:textColor="@android:color/white"
-            android:textSize="40sp" />
-
-        <TextView
-            android:id="@+id/country"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/joystix"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:text="COUNTRY"
-            android:textColor="@android:color/white"
-            android:textSize="40sp" />
-
-    <TextView
-        android:id="@+id/points"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/joystix"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="POINTS"
-        android:textColor="@android:color/white"
-        android:textSize="40sp" />
+    <fragment android:name="be.pxl.pacmanapp.ScoreDetail"
+        android:id="@+id/article_fragment"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>
 
 

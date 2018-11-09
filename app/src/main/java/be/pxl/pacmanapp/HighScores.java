@@ -70,9 +70,9 @@ public class HighScores extends AppCompatActivity {
                     int orientation = getResources().getConfiguration().orientation;
                     if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-                        TextView localNameView = (TextView)HighScores.this.findViewById(R.id.detailname);
-                        TextView localCountryView =(TextView)HighScores.this.findViewById(R.id.detailcountry);
-                        TextView loaclPointsView =(TextView)HighScores.this.findViewById(R.id.detailpoints);
+                        TextView localNameView = (TextView)  HighScores.this.findViewById(R.id.article_fragment).findViewById(R.id.name);
+                        TextView localCountryView =(TextView)HighScores.this.findViewById(R.id.article_fragment).findViewById(R.id.country);
+                        TextView loaclPointsView =(TextView)HighScores.this.findViewById(R.id.article_fragment).findViewById(R.id.points);
 
                         localNameView.setText(nameView.getText());
                         localCountryView.setText(countryView.getText());

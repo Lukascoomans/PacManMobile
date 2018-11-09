@@ -64,13 +64,16 @@ public class Leaderboards extends AppCompatActivity {
                 int orientation = getResources().getConfiguration().orientation;
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-                    TextView localNameView = (TextView)Leaderboards.this.findViewById(R.id.detailname);
-                    TextView localCountryView =(TextView)Leaderboards.this.findViewById(R.id.detailcountry);
-                    TextView loaclPointsView =(TextView)Leaderboards.this.findViewById(R.id.detailpoints);
+
+
+                    TextView localNameView = (TextView)Leaderboards.this.findViewById(R.id.article_fragment).findViewById(R.id.name);
+                    TextView localCountryView =(TextView)Leaderboards.this.findViewById(R.id.article_fragment).findViewById(R.id.country);
+                    TextView loaclPointsView =(TextView)Leaderboards.this.findViewById(R.id.article_fragment).findViewById(R.id.points);
 
                     localNameView.setText(nameView.getText());
                     localCountryView.setText(countryView.getText());
                     loaclPointsView.setText(pointsView.getText());
+
 
                 } else {
 
