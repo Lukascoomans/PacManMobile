@@ -55,17 +55,14 @@ public class NameSubmitFragment extends Fragment {
 
                         sendNotification();
 
-
                     }
-
-
                 }
             });
         }
     }
     private void arrangeData(final String name, final String country, final String score){
-
-        DataBaseExecutor executor = new DataBaseExecutor(new DataBaseHelper(getActivity().getApplicationContext()));
+        DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
+        DataBaseExecutor executor = new DataBaseExecutor(helper);
         HighScoreModel model = new HighScoreModel("0",name,score,country);
         executor.WriteToDatabase(model);
 
@@ -101,7 +98,7 @@ public class NameSubmitFragment extends Fragment {
         queue.add(jsonObjectRequest);
 
 
-
+        helper.close();
     }
 
     private void sendNotification(){
@@ -112,7 +109,6 @@ public class NameSubmitFragment extends Fragment {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getActivity());
 
-// notificationId is a unique int for each notification that you must define
         notificationManager.notify(1, mBuilder.build());
     }
 }

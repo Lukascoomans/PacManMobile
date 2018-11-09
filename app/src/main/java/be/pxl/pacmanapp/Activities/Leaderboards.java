@@ -40,8 +40,9 @@ public class Leaderboards extends AppCompatActivity {
         TextView listNameTextView = this.findViewById(R.id.list_name_textview);
         listNameTextView.setText(LIST_NAME);
 
-        setScoreList("");
         getWebString();
+
+
     }
 
     public void setScoreList(String json){
@@ -113,6 +114,7 @@ public class Leaderboards extends AppCompatActivity {
         });
 
         queue.add(stringRequest);
+        setScoreList("");
     }
 
 
