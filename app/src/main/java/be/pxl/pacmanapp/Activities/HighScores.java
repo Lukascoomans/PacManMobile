@@ -14,10 +14,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import be.pxl.pacmanapp.Data.DataBaseExecutor;
 import be.pxl.pacmanapp.Data.DataBaseHelper;
 import be.pxl.pacmanapp.JSONArrayCursor;
+import be.pxl.pacmanapp.Models.HighScoreModel;
 import be.pxl.pacmanapp.Models.ScoreBoardModel;
 import be.pxl.pacmanapp.R;
 import be.pxl.pacmanapp.ScoreListAdapter;
@@ -54,15 +57,23 @@ public class HighScores extends AppCompatActivity {
         DataBaseHelper helper = new DataBaseHelper(this);
 
         DataBaseExecutor executor = new DataBaseExecutor(helper);
-        ArrayList<ScoreBoardModel> models = executor.ReadFromDatabase();
-        String json="[";
+        ArrayList<HighScoreModel> models = executor.ReadFromDatabase();
 
-        for (ScoreBoardModel model: models) {
+        Collections.sort(models,new Comparator<HighScoreModel>() {
+            @Override
+            public int compare(HighScoreModel s1, HighScoreModel s2) {
+                return -Integer.compare(Integer.parseInt(s1.getScore()),Integer.parseInt(s2.getScore()));
+            }
+        });
+
+        String json="[";
+        int i =1;
+        for (HighScoreModel model: models) {
             json+="{";
-            json+="\"name\":\""+model.NAME;
-            json+="\",\"points\":\""+model.SCORE;
-            json+="\",\"position\":\""+model.ID;
-            json+="\",\"country\":\""+model.COUNTRY;
+            json+="\"name\":\""+model.getName();
+            json+="\",\"points\":\""+model.getScore();
+            json+="\",\"position\":\""+i++;
+            json+="\",\"country\":\""+model.getCountry();
             json+="\"},";
         }
         json =json.substring(0, json.length() - 1);
@@ -74,7 +85,7 @@ public class HighScores extends AppCompatActivity {
     public void setScoreList(String json){
         cursor = getJSONCursor(json);
 
-        adapter = new ScoreListAdapter(cursor, this, true,new View.OnClickListener() {
+        adapter = new ScoreListAdapter(cursor, this, false,new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

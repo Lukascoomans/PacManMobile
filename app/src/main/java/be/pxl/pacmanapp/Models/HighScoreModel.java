@@ -14,6 +14,10 @@ public class HighScoreModel {
         this.country = country;
     }
 
+    public HighScoreModel() {
+
+    }
+
     public String getId() {
         return id;
     }
@@ -28,5 +32,21 @@ public class HighScoreModel {
 
     public String getCountry() {
         return country;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

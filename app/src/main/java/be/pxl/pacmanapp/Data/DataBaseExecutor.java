@@ -44,7 +44,7 @@ public class DataBaseExecutor {
 
     //Read from database
 
-    public ArrayList<ScoreBoardModel> ReadFromDatabase(){
+    public ArrayList<HighScoreModel> ReadFromDatabase(){
         SQLiteDatabase readable = db.getWritableDatabase();
 
         String[] projection = {
@@ -66,13 +66,13 @@ public class DataBaseExecutor {
                 null
         );
 
-        ArrayList<ScoreBoardModel> itemIds = new ArrayList<ScoreBoardModel>();
+        ArrayList<HighScoreModel> itemIds = new ArrayList<HighScoreModel>();
         while(cursor.moveToNext()) {
-            ScoreBoardModel model = new ScoreBoardModel();
-                model.ID=cursor.getString(0);
-                model.NAME=cursor.getString(1);
-                model.SCORE=cursor.getString(2);
-                model.COUNTRY=cursor.getString(3);
+            HighScoreModel model = new HighScoreModel();
+                model.setId(cursor.getString(0));
+                model.setName(cursor.getString(1));
+                model.setScore(cursor.getString(2));
+                model.setCountry(cursor.getString(3));
 
             itemIds.add(model);
         }

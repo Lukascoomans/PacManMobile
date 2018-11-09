@@ -54,12 +54,12 @@ public class NameSubmitFragment extends Fragment {
                         arrangeData(name,country,score);
 
                         sendNotification();
-
                     }
                 }
             });
         }
     }
+
     private void arrangeData(final String name, final String country, final String score){
         DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
         DataBaseExecutor executor = new DataBaseExecutor(helper);
@@ -96,7 +96,6 @@ public class NameSubmitFragment extends Fragment {
         });
         jsonObjectRequest.setTag("VACTIVITY");
         queue.add(jsonObjectRequest);
-
 
         helper.close();
     }
