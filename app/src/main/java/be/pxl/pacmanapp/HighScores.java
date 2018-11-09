@@ -47,7 +47,7 @@ public class HighScores extends AppCompatActivity {
         test+="]";
         cursor = getJSONCursor(test);
 
-        adapter = new ScoreListAdapter(cursor, this, false);
+        adapter = new ScoreListAdapter(cursor, this, true);
 
         scoreList.setLayoutManager(new LinearLayoutManager(this));
         scoreList.setAdapter(adapter);

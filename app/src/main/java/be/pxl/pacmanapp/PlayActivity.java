@@ -48,7 +48,7 @@ public class PlayActivity extends AppCompatActivity {
         transaction.add(R.id.startbutton_fragment_container, startButtonFragment);
         transaction.commit();
 
-        gameTimer = new CountDownTimer(30000, 1000) {
+        gameTimer = new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 int currSecond = (int) millisUntilFinished / 1000;
@@ -69,6 +69,10 @@ public class PlayActivity extends AppCompatActivity {
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 nameSubmitFragment = new NameSubmitFragment();
+                Bundle args = new Bundle();
+                args.putString("score", count+"");
+                nameSubmitFragment.setArguments(args);
+
                 transaction.add(R.id.namesubmit_fragment_container, nameSubmitFragment);
                 transaction.commit();
             }

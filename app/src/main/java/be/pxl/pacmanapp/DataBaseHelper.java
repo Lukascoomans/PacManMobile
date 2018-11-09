@@ -16,7 +16,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     COLUMN_NAME_NAME + " TEXT," +
                     COLUMN_NAME_COUNTRY + " TEXT," +
-                    COLUMN_NAME_SCORE + " INTEGER)";
+                    COLUMN_NAME_SCORE + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
