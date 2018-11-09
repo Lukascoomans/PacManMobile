@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".ScoreBoardActivity">
+    tools:context=".ScoreDetail">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/name"
@@ -34,17 +32,17 @@
             android:textColor="@android:color/white"
             android:textSize="40sp" />
 
-    <TextView
-        android:id="@+id/points"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/joystix"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="POINTS"
-        android:textColor="@android:color/white"
-        android:textSize="40sp" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/joystix"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="POINTS"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="20dp"
+            android:textSize="40sp" />
+    </RelativeLayout>
 
-
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>

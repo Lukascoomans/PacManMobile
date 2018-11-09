@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
             <TextView
                 android:id="@+id/list_name_textview"
                 android:layout_width="wrap_content"
@@ -22,24 +23,63 @@
                 android:text="scores:"
                 android:textColor="#ffffff"
                 android:textSize="13pt"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_score"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/list_name_textview" />
         </FrameLayout>
+
+
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-                
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:id="@+id/detailname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/joystix"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/detailcountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/joystix"
+                android:layout_gravity="center_vertical"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/detailpoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/joystix"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_centerHorizontal="true"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
         </FrameLayout>
-    </RelativeLayout>
+
+
+    </LinearLayout>
 
 
 

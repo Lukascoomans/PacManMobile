@@ -1,6 +1,7 @@
 package be.pxl.pacmanapp;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -61,18 +62,34 @@ public class HighScores extends AppCompatActivity {
         adapter = new ScoreListAdapter(cursor, this, true,new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nextActivity = new Intent( getBaseContext(), ScoreBoardActivity.class);
 
+                    TextView nameView = (TextView)v.findViewById(R.id.name);
+                    TextView countryView = (TextView)v.findViewById(R.id.country);
+                    TextView pointsView = (TextView)v.findViewById(R.id.points);
 
-                Bundle args = new Bundle();
-                TextView nameView = (TextView)v.findViewById(R.id.name);
-                TextView countryView = (TextView)v.findViewById(R.id.country);
-                TextView pointsView = (TextView)v.findViewById(R.id.points);
-                nextActivity.putExtra("name",nameView.getText());
-                nextActivity.putExtra("country",countryView.getText());
-                nextActivity.putExtra("points",pointsView.getText());
+                    int orientation = getResources().getConfiguration().orientation;
+                    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-                startActivity(nextActivity);
+                        TextView localNameView = (TextView)HighScores.this.findViewById(R.id.detailname);
+                        TextView localCountryView =(TextView)HighScores.this.findViewById(R.id.detailcountry);
+                        TextView loaclPointsView =(TextView)HighScores.this.findViewById(R.id.detailpoints);
+
+                        localNameView.setText(nameView.getText());
+                        localCountryView.setText(countryView.getText());
+                        loaclPointsView.setText(pointsView.getText());
+
+                    } else {
+
+                        Intent nextActivity = new Intent( getBaseContext(), ScoreBoardActivity.class);
+
+                        Bundle args = new Bundle();
+                        nextActivity.putExtra("name",nameView.getText());
+                        nextActivity.putExtra("country",countryView.getText());
+                        nextActivity.putExtra("points",pointsView.getText());
+
+                        startActivity(nextActivity);
+                    }
+
             }
         });
 
