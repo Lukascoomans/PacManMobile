@@ -10,6 +10,8 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 public class HighScores extends AppCompatActivity {
     private static final String LIST_NAME = "Highscores";
     private ScoreListAdapter adapter;
@@ -28,10 +30,22 @@ public class HighScores extends AppCompatActivity {
 
         scoreList = this.findViewById(R.id.rv_score);
 
-        ScoreBoardCaller caller = new ScoreBoardCaller(this);
-        String json = (String)caller.callDatabase();
+        DataBaseExecutor executor = new DataBaseExecutor(new DataBaseHelper(this));
+        ArrayList<ScoreBoardModel> models = executor.ReadFromDatabase();
 
-        cursor = getJSONCursor(sample_response);
+        String test="[";
+
+        for (ScoreBoardModel model: models) {
+            test+="{";
+            test+="\"name\":\""+model.NAME;
+            test+="\",\"points\":\""+model.SCORE;
+            test+="\",\"position\":\""+model.ID;
+            test+="\",\"country\":\""+model.COUNTRY;
+            test+="\"},";
+        }
+        test =test.substring(0, test.length() - 1);
+        test+="]";
+        cursor = getJSONCursor(test);
 
         adapter = new ScoreListAdapter(cursor, this, false);
 
@@ -40,6 +54,16 @@ public class HighScores extends AppCompatActivity {
 
 
     }
+
+    public void setScoreList(String json,RecyclerView scoreList){
+        cursor = getJSONCursor(json);
+
+        adapter = new ScoreListAdapter(cursor, this, false);
+
+        scoreList.setLayoutManager(new LinearLayoutManager(this));
+        scoreList.setAdapter(adapter);
+    }
+
 
     private Cursor getJSONCursor(String response){
         try

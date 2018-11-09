@@ -29,6 +29,8 @@ public class MainMenu extends AppCompatActivity {
         transaction.add(R.id.highscoresbutton_container, highScoresButton);
         transaction.add(R.id.leaderboardsbutton_container, leaderBoardsButtonFragment);
         transaction.commit();
+
+        ScoreBoardCaller caller = new ScoreBoardCaller(this);
     }
 
     private void createNotificationChannel() {

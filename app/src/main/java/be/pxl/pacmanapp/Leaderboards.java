@@ -12,6 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -35,30 +42,47 @@ public class Leaderboards extends AppCompatActivity {
         TextView listNameTextView = this.findViewById(R.id.list_name_textview);
         listNameTextView.setText(LIST_NAME);
 
+        setScoreList(sample_response);
+        getWebString();
+    }
+
+    public void setScoreList(String json){
         scoreList = this.findViewById(R.id.rv_score);
 
-        DataBaseExecutor executor = new DataBaseExecutor(new DataBaseHelper(this));
-        ArrayList<ScoreBoardModel> models = executor.ReadFromDatabase();
-
-        String test="[";
-
-        for (ScoreBoardModel model: models) {
-            test+="{";
-            test+="\"name\":\""+model.NAME;
-            test+="\",\"points\":\""+model.SCORE;
-            test+="\",\"position\":\""+model.ID;
-            test+="\",\"country\":\""+model.COUNTRY;
-            test+="\"},";
-        }
-        test =test.substring(0, test.length() - 1);
-        test+="]";
-        cursor = getJSONCursor(test);
+        cursor = getJSONCursor(json);
 
         adapter = new ScoreListAdapter(cursor, this, true);
 
         scoreList.setLayoutManager(new LinearLayoutManager(this));
         scoreList.setAdapter(adapter);
+
     }
+
+    public void getWebString(){
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String url ="http://10.0.2.2:8080/PacMan";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        setScoreList(response);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                setScoreList("EROOR");
+            }
+        });
+
+        queue.add(stringRequest);
+    }
+
 
     private Cursor getJSONCursor(String response){
         try

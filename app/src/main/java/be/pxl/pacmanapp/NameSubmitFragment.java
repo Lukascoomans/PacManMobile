@@ -39,6 +39,8 @@ public class NameSubmitFragment extends Fragment {
                     if (!name.isEmpty()){
                         sendNotification();
                     }
+
+
                 }
             });
         }
