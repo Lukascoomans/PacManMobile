@@ -1,17 +1,13 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -24,8 +20,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.ArrayList;
-import java.util.List;
+import be.pxl.pacmanapp.JSONArrayCursor;
+import be.pxl.pacmanapp.R;
+import be.pxl.pacmanapp.ScoreListAdapter;
 
 public class Leaderboards extends AppCompatActivity {
     private static final String LIST_NAME = "Leaderboards";
@@ -33,8 +30,7 @@ public class Leaderboards extends AppCompatActivity {
     private RecyclerView scoreList;
     private Cursor cursor;
 
-    //private String sample_response = "[{\"name\":testname,\"points\":1230d0,\"position\":1,\"country\":Belgium},{\"name\":testname,\"points\":testscore,\"position\":1,\"country\":testcountry},{\"name\":David,\"points\":6000,\"position\":2,\"country\":England},{\"name\":Steve,\"points\":2400,\"position\":3,\"country\":America}]";
-    private String sample_response = "[{\"name\":testname,\"points\":testscore,\"position\":1,\"country\":testcountry}]";
+    private String no_connection_response = "[{\"name\":No Connection,\"points\":,\"position\":,\"country\":}]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -44,7 +40,7 @@ public class Leaderboards extends AppCompatActivity {
         TextView listNameTextView = this.findViewById(R.id.list_name_textview);
         listNameTextView.setText(LIST_NAME);
 
-        setScoreList(sample_response);
+        setScoreList("");
         getWebString();
     }
 
@@ -112,7 +108,7 @@ public class Leaderboards extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                setScoreList("EROOR");
+                setScoreList(no_connection_response);
             }
         });
 

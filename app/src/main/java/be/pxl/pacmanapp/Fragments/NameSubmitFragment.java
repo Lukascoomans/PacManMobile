@@ -1,13 +1,5 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Fragments;
 
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,15 +18,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import be.pxl.pacmanapp.Data.DataBaseExecutor;
+import be.pxl.pacmanapp.Data.DataBaseHelper;
+import be.pxl.pacmanapp.Models.HighScoreModel;
+import be.pxl.pacmanapp.R;
 
 public class NameSubmitFragment extends Fragment {
     @Nullable
@@ -74,7 +66,6 @@ public class NameSubmitFragment extends Fragment {
     private void arrangeData(final String name, final String country, final String score){
 
         DataBaseExecutor executor = new DataBaseExecutor(new DataBaseHelper(getActivity().getApplicationContext()));
-
         HighScoreModel model = new HighScoreModel("0",name,score,country);
         executor.WriteToDatabase(model);
 

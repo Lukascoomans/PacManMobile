@@ -45,7 +45,7 @@
             android:layout_weight="1"
             >
 
-            <fragment android:name="be.pxl.pacmanapp.ScoreDetail"
+            <fragment android:name="be.pxl.pacmanapp.Fragments.ScoreDetail"
                 android:id="@+id/article_fragment"
                 android:layout_weight="1"
                 android:layout_width="match_parent"

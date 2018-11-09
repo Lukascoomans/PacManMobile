@@ -1,4 +1,4 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,6 +14,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+
+import be.pxl.pacmanapp.Data.DataBaseExecutor;
+import be.pxl.pacmanapp.Data.DataBaseHelper;
+import be.pxl.pacmanapp.JSONArrayCursor;
+import be.pxl.pacmanapp.Models.ScoreBoardModel;
+import be.pxl.pacmanapp.R;
+import be.pxl.pacmanapp.ScoreListAdapter;
 
 public class HighScores extends AppCompatActivity {
     private static final String LIST_NAME = "Highscores";
@@ -32,28 +39,36 @@ public class HighScores extends AppCompatActivity {
         listNameTextView.setText(LIST_NAME);
 
         scoreList = this.findViewById(R.id.rv_score);
+        setScoreList("");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getData();
+            }
+        }).start();
 
-        DataBaseExecutor executor = new DataBaseExecutor(new DataBaseHelper(this));
+
+    }
+
+    public void getData(){
+        DataBaseHelper helper = new DataBaseHelper(this);
+
+        DataBaseExecutor executor = new DataBaseExecutor(helper);
         ArrayList<ScoreBoardModel> models = executor.ReadFromDatabase();
-
-        String test="[";
+        String json="[";
 
         for (ScoreBoardModel model: models) {
-            test+="{";
-            test+="\"name\":\""+model.NAME;
-            test+="\",\"points\":\""+model.SCORE;
-            test+="\",\"position\":\""+model.ID;
-            test+="\",\"country\":\""+model.COUNTRY;
-            test+="\"},";
+            json+="{";
+            json+="\"name\":\""+model.NAME;
+            json+="\",\"points\":\""+model.SCORE;
+            json+="\",\"position\":\""+model.ID;
+            json+="\",\"country\":\""+model.COUNTRY;
+            json+="\"},";
         }
-        test =test.substring(0, test.length() - 1);
-        test+="]";
-
-        setScoreList(test);
-
-
-
-
+        json =json.substring(0, json.length() - 1);
+        json+="]";
+        helper.close();
+        setScoreList(json);
     }
 
     public void setScoreList(String json){
@@ -70,13 +85,13 @@ public class HighScores extends AppCompatActivity {
                     int orientation = getResources().getConfiguration().orientation;
                     if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-                        TextView localNameView = (TextView)  HighScores.this.findViewById(R.id.article_fragment).findViewById(R.id.name);
+                        TextView localNameView = (TextView)HighScores.this.findViewById(R.id.article_fragment).findViewById(R.id.name);
                         TextView localCountryView =(TextView)HighScores.this.findViewById(R.id.article_fragment).findViewById(R.id.country);
-                        TextView loaclPointsView =(TextView)HighScores.this.findViewById(R.id.article_fragment).findViewById(R.id.points);
+                        TextView localPointsView =(TextView)HighScores.this.findViewById(R.id.article_fragment).findViewById(R.id.points);
 
                         localNameView.setText(nameView.getText());
                         localCountryView.setText(countryView.getText());
-                        loaclPointsView.setText(pointsView.getText());
+                        localPointsView.setText(pointsView.getText());
 
                     } else {
 

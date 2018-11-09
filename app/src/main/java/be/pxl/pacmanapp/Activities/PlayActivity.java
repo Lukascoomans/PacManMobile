@@ -1,4 +1,4 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Activities;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -7,9 +7,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import be.pxl.pacmanapp.Fragments.NameSubmitFragment;
+import be.pxl.pacmanapp.Fragments.StartButtonFragment;
+import be.pxl.pacmanapp.R;
 
 public class PlayActivity extends AppCompatActivity {
     private int count = 0;

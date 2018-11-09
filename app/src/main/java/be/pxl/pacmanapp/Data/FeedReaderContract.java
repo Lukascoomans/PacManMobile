@@ -1,4 +1,4 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Data;
 
 import android.provider.BaseColumns;
 

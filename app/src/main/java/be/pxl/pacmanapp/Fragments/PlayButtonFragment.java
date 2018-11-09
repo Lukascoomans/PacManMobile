@@ -1,4 +1,4 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Fragments;
 
 
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.view.View.OnClickListener;
+
+import be.pxl.pacmanapp.Activities.PlayActivity;
+import be.pxl.pacmanapp.R;
 
 public class PlayButtonFragment extends Fragment {
 

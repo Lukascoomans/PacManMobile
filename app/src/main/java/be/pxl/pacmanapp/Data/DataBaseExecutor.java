@@ -1,14 +1,15 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Data;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static be.pxl.pacmanapp.FeedReaderContract.FeedEntry.*;
+import be.pxl.pacmanapp.Models.HighScoreModel;
+import be.pxl.pacmanapp.Models.ScoreBoardModel;
+
+import static be.pxl.pacmanapp.Data.FeedReaderContract.FeedEntry.*;
 
 public class DataBaseExecutor {
 

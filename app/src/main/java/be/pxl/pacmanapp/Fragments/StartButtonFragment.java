@@ -1,4 +1,4 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+
+import be.pxl.pacmanapp.Activities.PlayActivity;
+import be.pxl.pacmanapp.R;
 
 public class StartButtonFragment extends Fragment {
     @Nullable

@@ -1,8 +1,10 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import be.pxl.pacmanapp.R;
 
 public class ScoreBoardActivity extends AppCompatActivity {
 

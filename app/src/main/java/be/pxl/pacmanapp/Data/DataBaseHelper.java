@@ -1,10 +1,10 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static be.pxl.pacmanapp.FeedReaderContract.FeedEntry.*;
+import static be.pxl.pacmanapp.Data.FeedReaderContract.FeedEntry.*;
 
 
 public class DataBaseHelper extends SQLiteOpenHelper {

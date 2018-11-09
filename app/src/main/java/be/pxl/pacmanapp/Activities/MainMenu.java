@@ -1,15 +1,17 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Activities;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
+
+import be.pxl.pacmanapp.Fragments.HighScoresButtonFragment;
+import be.pxl.pacmanapp.Fragments.LeaderBoardsButtonFragment;
+import be.pxl.pacmanapp.Fragments.PlayButtonFragment;
+import be.pxl.pacmanapp.R;
 
 public class MainMenu extends AppCompatActivity {
 

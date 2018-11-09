@@ -1,4 +1,4 @@
-package be.pxl.pacmanapp;
+package be.pxl.pacmanapp.Models;
 
 public class ScoreBoardModel {
 
