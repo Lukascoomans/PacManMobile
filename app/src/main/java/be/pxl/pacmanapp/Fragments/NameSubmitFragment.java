@@ -102,6 +102,7 @@ public class NameSubmitFragment extends Fragment {
 
     private void sendNotification(){
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity(), "Default")
+                .setSmallIcon(R.mipmap.app_icon)
                 .setContentTitle("Thanks for playing!")
                 .setContentText("We hope to see you soon.")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
