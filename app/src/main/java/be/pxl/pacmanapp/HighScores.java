@@ -1,10 +1,12 @@
 package be.pxl.pacmanapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -45,20 +47,34 @@ public class HighScores extends AppCompatActivity {
         }
         test =test.substring(0, test.length() - 1);
         test+="]";
-        cursor = getJSONCursor(test);
 
-        adapter = new ScoreListAdapter(cursor, this, true);
+        setScoreList(test);
 
-        scoreList.setLayoutManager(new LinearLayoutManager(this));
-        scoreList.setAdapter(adapter);
+
 
 
     }
 
-    public void setScoreList(String json,RecyclerView scoreList){
+    public void setScoreList(String json){
         cursor = getJSONCursor(json);
 
-        adapter = new ScoreListAdapter(cursor, this, false);
+        adapter = new ScoreListAdapter(cursor, this, true,new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextActivity = new Intent( getBaseContext(), ScoreBoardActivity.class);
+
+
+                Bundle args = new Bundle();
+                TextView nameView = (TextView)v.findViewById(R.id.name);
+                TextView countryView = (TextView)v.findViewById(R.id.country);
+                TextView pointsView = (TextView)v.findViewById(R.id.points);
+                nextActivity.putExtra("name",nameView.getText());
+                nextActivity.putExtra("country",countryView.getText());
+                nextActivity.putExtra("points",pointsView.getText());
+
+                startActivity(nextActivity);
+            }
+        });
 
         scoreList.setLayoutManager(new LinearLayoutManager(this));
         scoreList.setAdapter(adapter);

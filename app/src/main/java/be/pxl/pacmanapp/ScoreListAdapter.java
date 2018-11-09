@@ -10,14 +10,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.ScoreListViewHolder> {
+    private View.OnClickListener listener;
     private Cursor cursor;
     private Context context;
     private boolean showCountry;
 
-    public ScoreListAdapter(Cursor cursor, Context context, boolean showCountry){
+    public ScoreListAdapter(Cursor cursor, Context context, boolean showCountry,View.OnClickListener listener){
         this.cursor = cursor;
         this.context = context;
         this.showCountry = showCountry;
+        this.listener=listener;
+
     }
 
     @NonNull
@@ -25,7 +28,7 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
     public ScoreListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewtype) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.score_list_item, parent,false);
-        return new ScoreListViewHolder(view);
+        return new ScoreListViewHolder(view,listener);
     }
 
     @Override
@@ -83,12 +86,13 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.Scor
         public TextView nameTextView  = null;
         public TextView countryTextView = null;
 
-        public ScoreListViewHolder(final View itemView) {
+        public ScoreListViewHolder(final View itemView,View.OnClickListener listener) {
             super(itemView);
             positionTextView = itemView.findViewById(R.id.position);
             pointsTextView = itemView.findViewById(R.id.points);
             nameTextView = itemView.findViewById(R.id.name);
             countryTextView = itemView.findViewById(R.id.country);
+            itemView.setOnClickListener(listener);
         }
 
         public void HideCountryTextView(){

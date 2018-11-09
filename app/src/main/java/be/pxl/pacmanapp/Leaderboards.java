@@ -1,5 +1,6 @@
 package be.pxl.pacmanapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -51,7 +52,22 @@ public class Leaderboards extends AppCompatActivity {
 
         cursor = getJSONCursor(json);
 
-        adapter = new ScoreListAdapter(cursor, this, true);
+        adapter = new ScoreListAdapter(cursor, this, true, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextActivity = new Intent( getBaseContext(), ScoreBoardActivity.class);
+
+                Bundle args = new Bundle();
+                TextView nameView = (TextView)v.findViewById(R.id.name);
+                TextView countryView = (TextView)v.findViewById(R.id.country);
+                TextView pointsView = (TextView)v.findViewById(R.id.points);
+                nextActivity.putExtra("name",nameView.getText());
+                nextActivity.putExtra("country",countryView.getText());
+                nextActivity.putExtra("points",pointsView.getText());
+
+                startActivity(nextActivity);
+            }
+        });
 
         scoreList.setLayoutManager(new LinearLayoutManager(this));
         scoreList.setAdapter(adapter);
