@@ -17,7 +17,7 @@
             android:layout_marginTop="20dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="NAME"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="40sp" />
 
@@ -28,7 +28,7 @@
             android:fontFamily="@font/joystix"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
-            android:text="COUNTRY"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="40sp" />
 
@@ -39,7 +39,7 @@
             android:fontFamily="@font/joystix"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="POINTS"
+            android:text=""
             android:textColor="@android:color/white"
             android:layout_marginBottom="20dp"
             android:textSize="40sp" />

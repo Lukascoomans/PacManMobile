@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import be.pxl.pacmanapp.Models.HighScoreModel;
-import be.pxl.pacmanapp.Models.ScoreBoardModel;
 
 import static be.pxl.pacmanapp.Data.FeedReaderContract.FeedEntry.*;
 

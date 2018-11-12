@@ -21,7 +21,6 @@ import be.pxl.pacmanapp.Data.DataBaseExecutor;
 import be.pxl.pacmanapp.Data.DataBaseHelper;
 import be.pxl.pacmanapp.JSONArrayCursor;
 import be.pxl.pacmanapp.Models.HighScoreModel;
-import be.pxl.pacmanapp.Models.ScoreBoardModel;
 import be.pxl.pacmanapp.R;
 import be.pxl.pacmanapp.ScoreListAdapter;
 
@@ -30,8 +29,6 @@ public class HighScores extends AppCompatActivity {
     private ScoreListAdapter adapter;
     private RecyclerView scoreList;
     private Cursor cursor;
-
-    private String sample_response = "[{\"name\":Stefan,\"points\":12300,\"position\":1,\"country\":Belgium},{\"name\":David,\"points\":6000,\"position\":2,\"country\":England},{\"name\":Steve,\"points\":2400,\"position\":3,\"country\":America}]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

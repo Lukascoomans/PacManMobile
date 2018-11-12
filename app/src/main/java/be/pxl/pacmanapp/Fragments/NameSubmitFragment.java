@@ -1,5 +1,6 @@
 package be.pxl.pacmanapp.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +24,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import be.pxl.pacmanapp.Activities.MainMenu;
+import be.pxl.pacmanapp.Activities.ScoreBoardActivity;
 import be.pxl.pacmanapp.Data.DataBaseExecutor;
 import be.pxl.pacmanapp.Data.DataBaseHelper;
 import be.pxl.pacmanapp.Models.HighScoreModel;
@@ -54,6 +57,10 @@ public class NameSubmitFragment extends Fragment {
                         arrangeData(name,country,score);
 
                         sendNotification();
+
+                        Intent nextActivity = new Intent( getContext(), MainMenu.class);
+
+                        startActivity(nextActivity);
                     }
                 }
             });
