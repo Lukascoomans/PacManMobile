@@ -18,20 +18,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_COUNTRY + " TEXT," +
                     COLUMN_NAME_SCORE + " TEXT)";
 
+    SQLiteDatabase db;
+
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
 
     public DataBaseHelper( Context context) {
         super(context, DATABASE_NAME, null, 1);
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
-
-
     }
 
     @Override

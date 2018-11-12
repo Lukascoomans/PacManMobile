@@ -53,8 +53,6 @@ public class DataBaseExecutor {
                 COLUMN_NAME_COUNTRY
         };
 
-        String selection = COLUMN_NAME_NAME + " = ?";
-
         Cursor cursor = readable.query(
                 FeedReaderContract.FeedEntry.TABLE_NAME,
                 projection,
